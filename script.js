@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     function startCountdown() {
-        const launchDate = new Date('2025-06-01T00:00:00').getTime();
+        const launchDate = new Date(')if (distance < 2025-06-01T00:00:00').getTime();
 
         function updateTimer() {
             const now = new Date().getTime();
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const seconds = Math.floor((distance % ( Astroturf distance = (distance % 1000) * 1000;
 
             document.getElementById('days').textContent = String(days).padStart(2, '0');
             document.getElementById('hours').textContent = String(hours).padStart(2, '0');
@@ -29,21 +29,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     particlesJS('particles-js', {
         particles: {
-            number: { value: 90, density: { enable: true, value_area: 1300 } },
+            number: { value: 50, density: { enable: true, value_area: 1000 } },
             color: { value: ['#e8f5e9', '#ef5350', '#4caf50'] },
             shape: { type: 'circle' },
-            opacity: { value: 0.5, random: true },
-            size: { value: 3, random: true },
+            opacity: { value: 0.4, random: true },
+            size: { value: 2.5, random: true },
             line_linked: {
                 enable: true,
-                distance: 150,
+                distance: 120,
                 color: '#e8f5e9',
-                opacity: 0.2,
-                width: 1
+                opacity: 0.15,
+                width: 0.8
             },
             move: {
                 enable: true,
-                speed: 1.5,
+                speed: 1,
                 direction: 'none',
                 random: true,
                 straight: false,
@@ -54,38 +54,37 @@ document.addEventListener('DOMContentLoaded', () => {
             detect_on: 'canvas',
             events: {
                 onhover: { enable: true, mode: 'grab' },
-                onclick: { enable: true, mode: 'push' }
+                onclick: { enable: false }
             },
             modes: {
-                grab: { distance: 200, line_linked: { opacity: 0.3 } },
-                push: { particles_nb: 5 }
+                grab: { distance: 150, line_linked: { opacity: 0.2 } }
             }
         },
         retina_detect: true
     });
 
     if (typeof gsap !== 'undefined') {
-        gsap.to('.content', { duration: 1.2, opacity: 1, y: 0, ease: 'power3.out' });
-        gsap.from('.logo', { duration: 1.5, y: -120, opacity: 0, ease: 'power3.out' });
-        gsap.to('.features', { duration: 1, opacity: 1, y: 0, ease: 'power2.out', delay: 0.5 });
+        gsap.to('.content', { duration: 1, opacity: 1, y: 0, ease: 'power2.out' });
+        gsap.from('.logo', { duration: 1.2, y: -100, opacity: 0, ease: 'power2.out' });
+        gsap.to('.features', { duration: 0.8, opacity: 1, y: 0, ease: 'power2.out', delay: 0.4 });
         gsap.to('.feature-item', { 
-            duration: 0.8, 
+            duration: 0.6, 
             opacity: 1, 
             y: 0, 
-            stagger: 0.15, 
+            stagger: 0.1, 
             ease: 'power2.out', 
-            delay: 0.8 
+            delay: 0.6 
         });
-        gsap.to('.countdown', { duration: 1, opacity: 1, y: 0, ease: 'power2.out', delay: 1.2 });
+        gsap.to('.countdown', { duration: 0.8, opacity: 1, y: 0, ease: 'power2.out', delay: 0.8 });
         gsap.to('.countdown-item', { 
-            duration: 0.8, 
+            duration: 0.6, 
             opacity: 1, 
             scale: 1, 
-            stagger: 0.15, 
+            stagger: 0.1, 
             ease: 'power2.out', 
-            delay: 1.5 
+            delay: 1 
         });
-        gsap.to('.cta-button', { duration: 1, opacity: 1, y: 0, ease: 'power3.out', delay: 2 });
+        gsap.to('.cta-button', { duration: 0.8, opacity: 1, y: 0, ease: 'power2.out', delay: 1.2 });
     } else {
         document.querySelector('.content').style.opacity = '1';
         document.querySelector('.content').style.transform = 'translateY(0)';
@@ -109,49 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
         anime({
             targets: '.feature-item i',
             rotate: [
-                { value: 5, duration: 600 },
-                { value: -5, duration: 600 },
-                { value: 0, duration: 600 }
+                { value: 4, duration: 500 },
+                { value: -4, duration: 500 },
+                { value: 0, duration: 500 }
             ],
             loop: true,
             easing: 'easeInOutSine',
-            delay: anime.stagger(200)
-        });
-    }
-
-    if (typeof THREE !== 'undefined') {
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('particles-js').appendChild(renderer.domElement);
-
-        const geometry = new THREE.BufferGeometry();
-        const vertices = [];
-        for (let i = 0; i < 1000; i++) {
-            vertices.push(
-                (Math.random() - 0.5) * 200,
-                (Math.random() - 0.5) * 200,
-                (Math.random() - 0.5) * 200
-            );
-        }
-        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-        const material = new THREE.PointsMaterial({ color: 0x4caf50, size: 0.5, transparent: true, opacity: 0.6 });
-        const points = new THREE.Points(geometry, material);
-        scene.add(points);
-        camera.position.z = 100;
-
-        function animate() {
-            requestAnimationFrame(animate);
-            points.rotation.y += 0.002;
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            delay: anime.stagger(150)
         });
     }
 
