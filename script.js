@@ -1,6 +1,4 @@
-// Ensure DOM is loaded before running scripts
 document.addEventListener('DOMContentLoaded', () => {
-    // Countdown Timer
     function startCountdown() {
         const launchDate = new Date('2025-06-01T00:00:00').getTime();
 
@@ -29,24 +27,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const timerInterval = setInterval(updateTimer, 1000);
     }
 
-    // Particles.js Background
     particlesJS('particles-js', {
         particles: {
-            number: { value: 50, density: { enable: true, value_area: 800 } },
+            number: { value: 70, density: { enable: true, value_area: 1000 } },
             color: { value: ['#ffffff', '#d20000', '#004d00'] },
-            shape: { type: 'circle' },
-            opacity: { value: 0.6, random: true },
-            size: { value: 3, random: true },
+            shape: { type: 'polygon', polygon: { nb_sides: 6 } },
+            opacity: { value: 0.7, random: true },
+            size: { value: 4, random: true },
             line_linked: {
                 enable: true,
-                distance: 100,
+                distance: 120,
                 color: '#ffffff',
-                opacity: 0.2,
-                width: 1
+                opacity: 0.3,
+                width: 1.5
             },
             move: {
                 enable: true,
-                speed: 1.5,
+                speed: 2,
                 direction: 'none',
                 random: true,
                 straight: false,
@@ -60,57 +57,42 @@ document.addEventListener('DOMContentLoaded', () => {
                 onclick: { enable: true, mode: 'push' }
             },
             modes: {
-                grab: { distance: 140, line_linked: { opacity: 0.4 } },
-                push: { particles_nb: 2 }
+                grab: { distance: 160, line_linked: { opacity: 0.5 } },
+                push: { particles_nb: 3 }
             }
         },
         retina_detect: true
     }, () => {
-        console.log('Particles.js loaded successfully');
+        console.log('Particles loaded');
     });
 
-    // GSAP Animations
     if (typeof gsap !== 'undefined') {
-        gsap.to('.content', { duration: 1, opacity: 1, y: 0, ease: 'power3.out' });
-        gsap.from('.logo', { duration: 1.5, y: -100, opacity: 0, ease: 'power3.out' });
-        gsap.to('.feature-item', { 
-            duration: 1, 
-            opacity: 1, 
-            scale: 1, 
-            stagger: 0.2, 
-            ease: 'power2.out', 
-            delay: 0.5 
-        });
-        gsap.to('.countdown-item', { 
-            duration: 1, 
-            opacity: 1, 
-            scale: 1, 
-            stagger: 0.2, 
-            ease: 'power2.out', 
-            delay: 1 
-        });
+        gsap.to('.content', { duration: 1.2, opacity: 1, y: 0, ease: 'power3.out', onComplete: () => document.querySelector('.content').classList.add('visible') });
+        gsap.from('.logo', { duration: 1.5, y: -150, opacity: 0, ease: 'power3.out' });
+        gsap.to('.features', { duration: 1, opacity: 1, y: 0, ease: 'power2.out', delay: 0.5, onComplete: () => document.querySelector('.features').classList.add('visible') });
+        gsap.to('.countdown', { duration: 1, opacity: 1, y: 0, ease: 'power2.out', delay: 1, onComplete: () => document.querySelector('.countdown').classList.add('visible') });
     } else {
-        console.error('GSAP not loaded');
-        // Fallback: Show content without animation
         document.querySelector('.content').style.opacity = '1';
-        document.querySelectorAll('.feature-item').forEach(item => item.style.opacity = '1');
-        document.querySelectorAll('.countdown-item').forEach(item => item.style.opacity = '1');
+        document.querySelector('.content').style.transform = 'translateY(0)';
+        document.querySelector('.features').style.opacity = '1';
+        document.querySelector('.features').style.transform = 'translateY(0)';
+        document.querySelector('.countdown').style.opacity = '1';
+        document.querySelector('.countdown').style.transform = 'translateY(0)';
     }
 
-    // Custom Cursor
     const cursor = document.querySelector('.custom-cursor');
     if (window.innerWidth >= 1024) {
         document.addEventListener('mousemove', (e) => {
-            cursor.style.left = `${e.clientX - 15}px`;
-            cursor.style.top = `${e.clientY - 15}px`;
-            cursor.style.display = 'block'; // Ensure visibility
+            cursor.style.left = `${e.clientX - 17.5}px`;
+            cursor.style.top = `${e.clientY - 17.5}px`;
+            cursor.style.display = 'block';
         });
 
         document.addEventListener('mousedown', () => {
             if (typeof gsap !== 'undefined') {
-                gsap.to(cursor, { scale: 1.5, duration: 0.2 });
+                gsap.to(cursor, { scale: 1.6, duration: 0.2 });
             } else {
-                cursor.style.transform = 'scale(1.5)';
+                cursor.style.transform = 'scale(1.6)';
             }
         });
 
@@ -123,6 +105,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Start Countdown
     startCountdown();
 });
