@@ -29,21 +29,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     particlesJS('particles-js', {
         particles: {
-            number: { value: 80, density: { enable: true, value_area: 1200 } },
-            color: { value: ['#e0f7fa', '#f44336', '#4caf50'] },
+            number: { value: 90, density: { enable: true, value_area: 1300 } },
+            color: { value: ['#e8f5e9', '#ef5350', '#4caf50'] },
             shape: { type: 'circle' },
-            opacity: { value: 0.6, random: true },
-            size: { value: 3.5, random: true },
+            opacity: { value: 0.5, random: true },
+            size: { value: 3, random: true },
             line_linked: {
                 enable: true,
-                distance: 140,
-                color: '#e0f7fa',
-                opacity: 0.25,
-                width: 1.2
+                distance: 150,
+                color: '#e8f5e9',
+                opacity: 0.2,
+                width: 1
             },
             move: {
                 enable: true,
-                speed: 1.8,
+                speed: 1.5,
                 direction: 'none',
                 random: true,
                 straight: false,
@@ -57,8 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 onclick: { enable: true, mode: 'push' }
             },
             modes: {
-                grab: { distance: 180, line_linked: { opacity: 0.4 } },
-                push: { particles_nb: 4 }
+                grab: { distance: 200, line_linked: { opacity: 0.3 } },
+                push: { particles_nb: 5 }
             }
         },
         retina_detect: true
@@ -66,13 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (typeof gsap !== 'undefined') {
         gsap.to('.content', { duration: 1.2, opacity: 1, y: 0, ease: 'power3.out' });
-        gsap.from('.logo', { duration: 1.5, y: -150, opacity: 0, ease: 'power3.out' });
+        gsap.from('.logo', { duration: 1.5, y: -120, opacity: 0, ease: 'power3.out' });
         gsap.to('.features', { duration: 1, opacity: 1, y: 0, ease: 'power2.out', delay: 0.5 });
         gsap.to('.feature-item', { 
             duration: 0.8, 
             opacity: 1, 
             y: 0, 
-            stagger: 0.2, 
+            stagger: 0.15, 
             ease: 'power2.out', 
             delay: 0.8 
         });
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 0.8, 
             opacity: 1, 
             scale: 1, 
-            stagger: 0.2, 
+            stagger: 0.15, 
             ease: 'power2.out', 
             delay: 1.5 
         });
@@ -105,28 +105,53 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.cta-button').style.transform = 'translateY(0)';
     }
 
-    const cursor = document.querySelector('.custom-cursor');
-    if (window.innerWidth >= 1024) {
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = `${e.clientX - 20}px`;
-            cursor.style.top = `${e.clientY - 20}px`;
-            cursor.style.display = 'block';
+    if (typeof anime !== 'undefined') {
+        anime({
+            targets: '.feature-item i',
+            rotate: [
+                { value: 5, duration: 600 },
+                { value: -5, duration: 600 },
+                { value: 0, duration: 600 }
+            ],
+            loop: true,
+            easing: 'easeInOutSine',
+            delay: anime.stagger(200)
         });
+    }
 
-        document.addEventListener('mousedown', () => {
-            if (typeof gsap !== 'undefined') {
-                gsap.to(cursor, { scale: 1.7, duration: 0.2 });
-            } else {
-                cursor.style.transform = 'scale(1.7)';
-            }
-        });
+    if (typeof THREE !== 'undefined') {
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('particles-js').appendChild(renderer.domElement);
 
-        document.addEventListener('mouseup', () => {
-            if (typeof gsap !== 'undefined') {
-                gsap.to(cursor, { scale: 1, duration: 0.2 });
-            } else {
-                cursor.style.transform = 'scale(1)';
-            }
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        for (let i = 0; i < 1000; i++) {
+            vertices.push(
+                (Math.random() - 0.5) * 200,
+                (Math.random() - 0.5) * 200,
+                (Math.random() - 0.5) * 200
+            );
+        }
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        const material = new THREE.PointsMaterial({ color: 0x4caf50, size: 0.5, transparent: true, opacity: 0.6 });
+        const points = new THREE.Points(geometry, material);
+        scene.add(points);
+        camera.position.z = 100;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            points.rotation.y += 0.002;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
         });
     }
 
