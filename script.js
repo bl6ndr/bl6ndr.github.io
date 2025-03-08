@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     function startCountdown() {
-        const launchDate = new Date(')if (distance < 2025-06-01T00:00:00').getTime();
+        const launchDate = new Date('2025-06-01T00:00:00').getTime();
 
         function updateTimer() {
             const now = new Date().getTime();
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % ( Astroturf distance = (distance % 1000) * 1000;
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             document.getElementById('days').textContent = String(days).padStart(2, '0');
             document.getElementById('hours').textContent = String(hours).padStart(2, '0');
@@ -29,21 +29,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     particlesJS('particles-js', {
         particles: {
-            number: { value: 50, density: { enable: true, value_area: 1000 } },
-            color: { value: ['#e8f5e9', '#ef5350', '#4caf50'] },
+            number: { value: 40, density: { enable: true, value_area: 800 } },
+            color: { value: ['#e1f5fe', '#ef5350', '#81c784'] },
             shape: { type: 'circle' },
-            opacity: { value: 0.4, random: true },
-            size: { value: 2.5, random: true },
+            opacity: { value: 0.3, random: true },
+            size: { value: 2, random: true },
             line_linked: {
                 enable: true,
-                distance: 120,
-                color: '#e8f5e9',
-                opacity: 0.15,
-                width: 0.8
+                distance: 100,
+                color: '#e1f5fe',
+                opacity: 0.1,
+                width: 0.6
             },
             move: {
                 enable: true,
-                speed: 1,
+                speed: 0.8,
                 direction: 'none',
                 random: true,
                 straight: false,
@@ -57,34 +57,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 onclick: { enable: false }
             },
             modes: {
-                grab: { distance: 150, line_linked: { opacity: 0.2 } }
+                grab: { distance: 120, line_linked: { opacity: 0.15 } }
             }
         },
         retina_detect: true
     });
 
     if (typeof gsap !== 'undefined') {
-        gsap.to('.content', { duration: 1, opacity: 1, y: 0, ease: 'power2.out' });
-        gsap.from('.logo', { duration: 1.2, y: -100, opacity: 0, ease: 'power2.out' });
-        gsap.to('.features', { duration: 0.8, opacity: 1, y: 0, ease: 'power2.out', delay: 0.4 });
+        gsap.to('.content', { duration: 0.8, opacity: 1, y: 0, ease: 'power2.out' });
+        gsap.from('.logo', { duration: 1, y: -80, opacity: 0, ease: 'power2.out' });
+        gsap.to('.features', { duration: 0.6, opacity: 1, y: 0, ease: 'power2.out', delay: 0.3 });
         gsap.to('.feature-item', { 
-            duration: 0.6, 
+            duration: 0.5, 
             opacity: 1, 
             y: 0, 
-            stagger: 0.1, 
+            stagger: 0.08, 
             ease: 'power2.out', 
-            delay: 0.6 
+            delay: 0.5 
         });
-        gsap.to('.countdown', { duration: 0.8, opacity: 1, y: 0, ease: 'power2.out', delay: 0.8 });
+        gsap.to('.countdown', { duration: 0.6, opacity: 1, y: 0, ease: 'power2.out', delay: 0.6 });
         gsap.to('.countdown-item', { 
-            duration: 0.6, 
+            duration: 0.5, 
             opacity: 1, 
             scale: 1, 
-            stagger: 0.1, 
+            stagger: 0.08, 
             ease: 'power2.out', 
-            delay: 1 
+            delay: 0.8 
         });
-        gsap.to('.cta-button', { duration: 0.8, opacity: 1, y: 0, ease: 'power2.out', delay: 1.2 });
+        gsap.to('.cta-button', { duration: 0.6, opacity: 1, y: 0, ease: 'power2.out', delay: 1 });
     } else {
         document.querySelector('.content').style.opacity = '1';
         document.querySelector('.content').style.transform = 'translateY(0)';
@@ -108,13 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
         anime({
             targets: '.feature-item i',
             rotate: [
-                { value: 4, duration: 500 },
-                { value: -4, duration: 500 },
-                { value: 0, duration: 500 }
+                { value: 3, duration: 400 },
+                { value: -3, duration: 400 },
+                { value: 0, duration: 400 }
             ],
             loop: true,
             easing: 'easeInOutSine',
-            delay: anime.stagger(150)
+            delay: anime.stagger(100)
         });
     }
 
