@@ -29,21 +29,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     particlesJS('particles-js', {
         particles: {
-            number: { value: 40, density: { enable: true, value_area: 800 } },
-            color: { value: ['#e1f5fe', '#ef5350', '#81c784'] },
+            number: { value: 30, density: { enable: true, value_area: 700 } },
+            color: { value: ['#eceff5', '#f4511e', '#64dd17'] },
             shape: { type: 'circle' },
-            opacity: { value: 0.3, random: true },
-            size: { value: 2, random: true },
+            opacity: { value: 0.25, random: true },
+            size: { value: 1.5, random: true },
             line_linked: {
                 enable: true,
-                distance: 100,
-                color: '#e1f5fe',
-                opacity: 0.1,
-                width: 0.6
+                distance: 80,
+                color: '#eceff5',
+                opacity: 0.08,
+                width: 0.5
             },
             move: {
                 enable: true,
-                speed: 0.8,
+                speed: 0.6,
                 direction: 'none',
                 random: true,
                 straight: false,
@@ -57,34 +57,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 onclick: { enable: false }
             },
             modes: {
-                grab: { distance: 120, line_linked: { opacity: 0.15 } }
+                grab: { distance: 100, line_linked: { opacity: 0.1 } }
             }
         },
         retina_detect: true
     });
 
     if (typeof gsap !== 'undefined') {
-        gsap.to('.content', { duration: 0.8, opacity: 1, y: 0, ease: 'power2.out' });
-        gsap.from('.logo', { duration: 1, y: -80, opacity: 0, ease: 'power2.out' });
-        gsap.to('.features', { duration: 0.6, opacity: 1, y: 0, ease: 'power2.out', delay: 0.3 });
+        gsap.to('.content', { duration: 0.7, opacity: 1, y: 0, ease: 'power2.out' });
+        gsap.from('.logo', { duration: 0.9, y: -60, opacity: 0, ease: 'power2.out' });
+        gsap.to('.features', { duration: 0.5, opacity: 1, y: 0, ease: 'power2.out', delay: 0.2 });
         gsap.to('.feature-item', { 
-            duration: 0.5, 
+            duration: 0.4, 
             opacity: 1, 
             y: 0, 
-            stagger: 0.08, 
+            stagger: 0.06, 
             ease: 'power2.out', 
-            delay: 0.5 
+            delay: 0.4 
         });
-        gsap.to('.countdown', { duration: 0.6, opacity: 1, y: 0, ease: 'power2.out', delay: 0.6 });
+        gsap.to('.countdown', { duration: 0.5, opacity: 1, y: 0, ease: 'power2.out', delay: 0.5 });
         gsap.to('.countdown-item', { 
-            duration: 0.5, 
+            duration: 0.4, 
             opacity: 1, 
             scale: 1, 
-            stagger: 0.08, 
+            stagger: 0.06, 
             ease: 'power2.out', 
-            delay: 0.8 
+            delay: 0.7 
         });
-        gsap.to('.cta-button', { duration: 0.6, opacity: 1, y: 0, ease: 'power2.out', delay: 1 });
+        gsap.to('.cta-button', { duration: 0.5, opacity: 1, y: 0, ease: 'power2.out', delay: 0.9 });
     } else {
         document.querySelector('.content').style.opacity = '1';
         document.querySelector('.content').style.transform = 'translateY(0)';
@@ -108,13 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
         anime({
             targets: '.feature-item i',
             rotate: [
-                { value: 3, duration: 400 },
-                { value: -3, duration: 400 },
-                { value: 0, duration: 400 }
+                { value: 2, duration: 300 },
+                { value: -2, duration: 300 },
+                { value: 0, duration: 300 }
             ],
             loop: true,
             easing: 'easeInOutSine',
-            delay: anime.stagger(100)
+            delay: anime.stagger(80)
         });
     }
 
