@@ -13,15 +13,18 @@ const phrases = [
     "i’m breaking.",
     "no one hears me.",
     "it hurts so much.",
-    "i’m drowning in them."
+    "i’m drowning in them.",
+    "nothing left of me.",
+    "just silence please.",
+    "i fade away."
 ];
 
 function corruptText(text) {
     let corrupted = '';
     for (let char of text) {
-        if (Math.random() < 0.2) {
-            corrupted += String.fromCharCode(char.charCodeAt(0) + Math.floor(Math.random() * 10) - 5);
-        } else if (Math.random() < 0.1) {
+        if (Math.random() < 0.25) {
+            corrupted += String.fromCharCode(char.charCodeAt(0) + Math.floor(Math.random() * 15) - 7);
+        } else if (Math.random() < 0.15) {
             corrupted += char.toUpperCase();
         } else {
             corrupted += char;
@@ -33,9 +36,9 @@ function corruptText(text) {
 function typeWriter(text, i, fnCallback) {
     if (i < text.length) {
         textElement.innerText = text.substring(0, i + 1);
-        setTimeout(() => typeWriter(text, i + 1, fnCallback), 80);
+        setTimeout(() => typeWriter(text, i + 1, fnCallback), 70);
     } else if (typeof fnCallback === 'function') {
-        setTimeout(fnCallback, 500);
+        setTimeout(fnCallback, 400);
     }
 }
 
@@ -47,8 +50,8 @@ function glitchText() {
         setTimeout(() => {
             textElement.innerText = originalText;
             textElement.classList.remove('animate__shakeX');
-        }, 1200);
+        }, 1500);
     });
 }
 
-setInterval(glitchText, 2500);
+setInterval(glitchText, 2000);
