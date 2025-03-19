@@ -9,27 +9,46 @@ const phrases = [
     "why won’t they leave?",
     "it’s all in my head.",
     "tearing me apart.",
-    "lost in the noise."
+    "lost in the noise.",
+    "i’m breaking.",
+    "no one hears me.",
+    "it hurts so much.",
+    "i’m drowning in them."
 ];
+
+function corruptText(text) {
+    let corrupted = '';
+    for (let char of text) {
+        if (Math.random() < 0.2) {
+            corrupted += String.fromCharCode(char.charCodeAt(0) + Math.floor(Math.random() * 10) - 5);
+        } else if (Math.random() < 0.1) {
+            corrupted += char.toUpperCase();
+        } else {
+            corrupted += char;
+        }
+    }
+    return corrupted;
+}
 
 function typeWriter(text, i, fnCallback) {
     if (i < text.length) {
         textElement.innerText = text.substring(0, i + 1);
-        setTimeout(() => typeWriter(text, i + 1, fnCallback), 100);
+        setTimeout(() => typeWriter(text, i + 1, fnCallback), 80);
     } else if (typeof fnCallback === 'function') {
-        setTimeout(fnCallback, 700);
+        setTimeout(fnCallback, 500);
     }
 }
 
 function glitchText() {
     const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-    typeWriter(randomPhrase, 0, () => {
+    const corruptedPhrase = corruptText(randomPhrase);
+    typeWriter(corruptedPhrase, 0, () => {
         textElement.classList.add('animate__shakeX');
         setTimeout(() => {
             textElement.innerText = originalText;
             textElement.classList.remove('animate__shakeX');
-        }, 1000);
+        }, 1200);
     });
 }
 
-setInterval(glitchText, 3000);
+setInterval(glitchText, 2500);
